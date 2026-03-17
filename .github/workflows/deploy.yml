@@ -10,31 +10,36 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # حل التنبيه الأصفر اللي في صورتك
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps || npm install --force
+      - name: Fix Ajv & Install
+        run: |
+          npm install --legacy-peer-deps
+          # هذا السطر يحل مشكلة ajv-keywords اللي ظاهرة في السطر 106 عندك
+          npm install ajv@^8.12.0 ajv-keywords@^5.1.0 --save-dev --legacy-peer-deps
       - name: Build Web
         run: |
           export NODE_OPTIONS=--openssl-legacy-provider
-          npx expo export:web || npx expo export -p web
+          npx expo export:web
       - name: Smart Folder Detection
         id: detect
         run: |
           if [ -d "dist" ]; then
-            echo "folder=dist" >> $GITHUB_OUTPUT
+            echo "path=dist" >> $GITHUB_OUTPUT
           elif [ -d "web-build" ]; then
-            echo "folder=web-build" >> $GITHUB_OUTPUT
+            echo "path=web-build" >> $GITHUB_OUTPUT
           else
-            echo "Build folder not found" && exit 1
+            echo "Error: No build folder found" && exit 1
           fi
-      - name: Upload artifact
+      - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ steps.detect.outputs.folder }}
+          path: ${{ steps.detect.outputs.path }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
