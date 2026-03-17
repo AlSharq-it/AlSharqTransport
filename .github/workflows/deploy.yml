@@ -14,19 +14,27 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'npm'
+          node-version: 20
       - name: Install dependencies
-        run: |
-          npm install --legacy-peer-deps
-          npm install react-native-web react-dom @expo/metro-runtime
+        run: npm install --legacy-peer-deps || npm install --force
       - name: Build Web
         run: |
           export NODE_OPTIONS=--openssl-legacy-provider
-          npx expo export:web
-      - uses: actions/upload-pages-artifact@v3
+          npx expo export:web || npx expo export -p web
+      - name: Smart Folder Detection
+        id: detect
+        run: |
+          if [ -d "dist" ]; then
+            echo "folder=dist" >> $GITHUB_OUTPUT
+          elif [ -d "web-build" ]; then
+            echo "folder=web-build" >> $GITHUB_OUTPUT
+          else
+            echo "Build folder not found" && exit 1
+          fi
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: ${{ steps.detect.outputs.folder }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
