@@ -16,9 +16,10 @@ export default function TabLayout() {
     paddingTop: 8,
     paddingBottom: Platform.select({ ios: insets.bottom + 8, android: insets.bottom + 8, default: 8 }),
     paddingHorizontal: 8,
-    backgroundColor: theme.surface,
+    backgroundColor: '#FFFFFF',
     borderTopWidth: 1,
     borderTopColor: theme.border,
+    elevation: 8,
   };
 
   return (

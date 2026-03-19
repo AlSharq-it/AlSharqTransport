@@ -117,23 +117,24 @@ export default function AdminSettingsScreen() {
                   <MaterialIcons name="info-outline" size={22} color={theme.primary} />
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text style={styles.settingsLabel}>عن الشرق</Text>
+                  <Text style={styles.settingsLabel}>الشرق درايفر</Text>
                   <Text style={styles.settingsValue}>الإصدار {config.version}</Text>
                 </View>
               </View>
             </View>
             <View style={styles.settingsDivider} />
-            <View style={styles.settingsRow}>
+            <Pressable onPress={() => Linking.openURL('https://wa.me/966569559088').catch(() => {})} style={styles.settingsRow}>
               <View style={styles.settingsLeft}>
-                <View style={[styles.settingsIcon, { backgroundColor: theme.primary + '12' }]}>
-                  <MaterialIcons name="email" size={22} color={theme.primary} />
+                <View style={[styles.settingsIcon, { backgroundColor: '#25D36620' }]}>
+                  <MaterialIcons name="chat" size={22} color="#25D366" />
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text style={styles.settingsLabel}>تواصل معنا</Text>
-                  <Text style={styles.settingsValue}>{config.email}</Text>
+                  <Text style={styles.settingsLabel}>للمساعدة والدعم</Text>
+                  <Text style={styles.settingsValue}>0569559088 • واتسآب</Text>
                 </View>
               </View>
-            </View>
+              <MaterialIcons name="chevron-left" size={22} color={theme.textMuted} />
+            </Pressable>
           </View>
         </Animated.View>
 
@@ -158,20 +159,21 @@ const styles = StyleSheet.create({
   header: { paddingHorizontal: 16, paddingTop: 8, paddingBottom: 12 },
   title: { ...typography.title, writingDirection: 'rtl', textAlign: 'right' },
   profileCard: {
-    marginHorizontal: 20, padding: 28, backgroundColor: theme.surface,
-    borderRadius: theme.radiusXL, alignItems: 'center', borderWidth: 1, borderColor: theme.border, marginBottom: 24,
+    marginHorizontal: 20, padding: 28, backgroundColor: theme.primary,
+    borderRadius: theme.radiusXL, alignItems: 'center', marginBottom: 24, ...theme.shadowElevated,
   },
   profileAvatar: {
     width: 72, height: 72, borderRadius: 36,
-    backgroundColor: theme.primary + '20', alignItems: 'center', justifyContent: 'center', marginBottom: 12,
+    backgroundColor: 'rgba(255,255,255,0.2)', alignItems: 'center', justifyContent: 'center', marginBottom: 12,
   },
-  profileName: { fontSize: 20, fontWeight: '700', color: theme.textPrimary, writingDirection: 'rtl' },
-  profileEmail: { ...typography.caption, marginTop: 4, writingDirection: 'rtl' },
+  profileName: { fontSize: 20, fontWeight: '700', color: '#FFFFFF', writingDirection: 'rtl' },
+  profileEmail: { ...typography.caption, marginTop: 4, writingDirection: 'rtl', color: 'rgba(255,255,255,0.75)' },
   roleBadge: {
     flexDirection: 'row', alignItems: 'center', gap: 4,
     marginTop: 10, paddingHorizontal: 14, paddingVertical: 6, borderRadius: theme.radiusFull,
+    backgroundColor: 'rgba(255,255,255,0.2)',
   },
-  roleText: { fontSize: 13, fontWeight: '700' },
+  roleText: { fontSize: 13, fontWeight: '700', color: '#FFFFFF' },
   settingsGroup: { marginBottom: 20, paddingHorizontal: 20 },
   groupTitle: { ...typography.captionBold, writingDirection: 'rtl', textAlign: 'right', marginBottom: 8, paddingHorizontal: 4 },
   groupCard: { backgroundColor: theme.surface, borderRadius: theme.radiusLarge, overflow: 'hidden', borderWidth: 1, borderColor: theme.border },
@@ -191,6 +193,6 @@ const styles = StyleSheet.create({
   },
   logoutText: { fontSize: 15, fontWeight: '600', color: theme.error },
   footer: { alignItems: 'center', paddingVertical: 24, gap: 4 },
-  footerText: { ...typography.caption, writingDirection: 'rtl' },
+  footerText: { ...typography.caption, writingDirection: 'rtl', fontWeight: '700', color: theme.primary },
   footerVersion: { fontSize: 11, fontWeight: '600', color: theme.textMuted },
 });

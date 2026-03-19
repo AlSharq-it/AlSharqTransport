@@ -47,7 +47,7 @@ export default function LoginScreen() {
             <View style={styles.logoContainer}>
               <MaterialIcons name="local-shipping" size={48} color={theme.primary} />
             </View>
-            <Text style={styles.appName}>الشرق للنقل والتوصيل</Text>
+            <Text style={styles.appName}>الشرق درايفر</Text>
             <Text style={styles.appSubtitle}>منصة إدارة المشاوير والسائقين</Text>
           </Animated.View>
 
@@ -96,15 +96,15 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: theme.background },
   scrollContent: { paddingHorizontal: 24, paddingBottom: 40 },
   heroSection: { alignItems: 'center', paddingTop: 40, paddingBottom: 24 },
-  logoContainer: { width: 100, height: 100, borderRadius: 50, backgroundColor: theme.primary + '15', alignItems: 'center', justifyContent: 'center', marginBottom: 16 },
-  appName: { fontSize: 26, fontWeight: '700', color: theme.textPrimary, writingDirection: 'rtl', textAlign: 'center' },
+  logoContainer: { width: 100, height: 100, borderRadius: 50, backgroundColor: theme.primary, alignItems: 'center', justifyContent: 'center', marginBottom: 16, ...theme.shadowElevated },
+  appName: { fontSize: 28, fontWeight: '700', color: theme.primary, writingDirection: 'rtl', textAlign: 'center' },
   appSubtitle: { ...typography.caption, writingDirection: 'rtl', textAlign: 'center', marginTop: 4 },
   formCard: { backgroundColor: theme.surface, borderRadius: theme.radiusXL, padding: 24, borderWidth: 1, borderColor: theme.border },
   formTitle: { fontSize: 20, fontWeight: '700', color: theme.textPrimary, writingDirection: 'rtl', textAlign: 'right', marginBottom: 20 },
   label: { ...typography.captionBold, writingDirection: 'rtl', textAlign: 'right', marginBottom: 6, marginTop: 12 },
   inputRow: { flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: theme.surfaceElevated, borderRadius: theme.radiusMedium, paddingHorizontal: 14, paddingVertical: 12, borderWidth: 1.5, borderColor: theme.border },
   input: { flex: 1, fontSize: 15, color: theme.textPrimary, writingDirection: 'rtl' },
-  loginBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: theme.primary, paddingVertical: 16, borderRadius: theme.radiusMedium, marginTop: 24 },
+  loginBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: theme.accent, paddingVertical: 16, borderRadius: theme.radiusMedium, marginTop: 24 },
   loginBtnText: { color: '#FFF', fontSize: 16, fontWeight: '700' },
   registerSection: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 24 },
   registerText: { ...typography.body, color: theme.textSecondary, writingDirection: 'rtl' },

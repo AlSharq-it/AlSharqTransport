@@ -130,7 +130,7 @@ type TranslationKeys = {
 };
 
 const ar: TranslationKeys = {
-  appName: 'الشرق للنقل والتوصيل',
+  appName: 'الشرق درايفر',
   home: 'الرئيسية',
   myTrips: 'مشاويري',
   earnings: 'الأرباح',

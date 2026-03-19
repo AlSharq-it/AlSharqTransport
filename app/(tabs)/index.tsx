@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {
   View, Text, ScrollView, Pressable, StyleSheet, Modal,
@@ -47,7 +48,7 @@ export default function HomeScreen() {
         <Animated.View entering={FadeInDown.duration(400)} style={styles.header}>
           <View style={styles.headerLeft}>
             <Pressable onPress={() => router.push('/edit-profile')} style={styles.avatarPlaceholder}>
-              <MaterialIcons name="person" size={28} color={theme.primary} />
+              <MaterialIcons name="person" size={28} color="#FFFFFF" />
             </Pressable>
             <View>
               <Text style={styles.greeting}>{t.home === 'Home' ? 'Hello,' : t.home === 'ہوم' ? 'خوش آمدید،' : 'مرحباً،'}</Text>
@@ -56,11 +57,11 @@ export default function HomeScreen() {
           </View>
           <View style={styles.headerRight}>
             <Pressable onPress={() => router.push('/chat')} style={styles.iconBtn}>
-              <MaterialIcons name="chat-bubble-outline" size={22} color={theme.textSecondary} />
+              <MaterialIcons name="chat-bubble-outline" size={22} color="#FFFFFF" />
               {unreadMessages > 0 ? <View style={styles.badge}><Text style={styles.badgeText}>{unreadMessages}</Text></View> : null}
             </Pressable>
             <Pressable onPress={() => router.push('/notifications')} style={styles.iconBtn}>
-              <MaterialIcons name="notifications-none" size={24} color={theme.textSecondary} />
+              <MaterialIcons name="notifications-none" size={24} color="#FFFFFF" />
               {unreadNotifications > 0 ? <View style={styles.badge}><Text style={styles.badgeText}>{unreadNotifications}</Text></View> : null}
             </Pressable>
           </View>
@@ -68,7 +69,7 @@ export default function HomeScreen() {
 
         {/* Status toggle */}
         <Animated.View entering={FadeInDown.duration(400).delay(100)}>
-          <Pressable onPress={toggleAvailability} style={[styles.statusCard, { backgroundColor: isAvailable ? '#064E3B' : '#7F1D1D' }]}>
+          <Pressable onPress={toggleAvailability} style={styles.statusCard}> {/* Added Pressable and style */}
             <View style={styles.statusRow}>
               <View style={[styles.statusDot, { backgroundColor: isAvailable ? theme.success : theme.error }]} />
               <Text style={[styles.statusText, { color: isAvailable ? theme.success : theme.error }]}>
@@ -233,19 +234,18 @@ function TripCard({ trip, index, onPress }: { trip: Trip; index: number; onPress
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: theme.background },
 
-  // Header
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingTop: 12, paddingBottom: 20 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingTop: 12, paddingBottom: 20, backgroundColor: theme.primary, borderBottomLeftRadius: 24, borderBottomRightRadius: 24 },
   headerLeft: { flexDirection: 'row', alignItems: 'center', gap: 14 },
-  avatarPlaceholder: { width: 52, height: 52, borderRadius: 26, backgroundColor: theme.primary + '20', alignItems: 'center', justifyContent: 'center' },
-  greeting: { ...typography.caption, writingDirection: 'rtl' },
-  driverName: { fontSize: 20, fontWeight: '700', color: theme.textPrimary, writingDirection: 'rtl' },
+  avatarPlaceholder: { width: 52, height: 52, borderRadius: 26, backgroundColor: 'rgba(255,255,255,0.2)', alignItems: 'center', justifyContent: 'center' },
+  greeting: { ...typography.caption, writingDirection: 'rtl', color: 'rgba(255,255,255,0.75)' },
+  driverName: { fontSize: 20, fontWeight: '700', color: '#FFFFFF', writingDirection: 'rtl' },
   headerRight: { flexDirection: 'row', gap: 6 },
-  iconBtn: { width: 48, height: 48, borderRadius: 24, backgroundColor: theme.surfaceElevated, alignItems: 'center', justifyContent: 'center' },
-  badge: { position: 'absolute', top: 6, right: 6, backgroundColor: theme.error, borderRadius: 8, minWidth: 16, height: 16, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
+  iconBtn: { width: 48, height: 48, borderRadius: 24, backgroundColor: 'rgba(255,255,255,0.15)', alignItems: 'center', justifyContent: 'center' },
+  badge: { position: 'absolute', top: 6, right: 6, backgroundColor: theme.accent, borderRadius: 8, minWidth: 16, height: 16, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
   badgeText: { color: '#FFF', fontSize: 10, fontWeight: '700' },
 
   // Status card
-  statusCard: { marginHorizontal: 20, padding: 18, borderRadius: theme.radiusLarge, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, borderWidth: 1, borderColor: theme.border },
+  statusCard: { marginHorizontal: 20, padding: 18, borderRadius: theme.radiusLarge, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, borderWidth: 1.5, borderColor: theme.border, backgroundColor: theme.surface },
   statusRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   statusDot: { width: 10, height: 10, borderRadius: 5 },
   statusText: { fontSize: 15, fontWeight: '600', writingDirection: 'rtl' as const },
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
 
   // Stats row
   statsRow: { flexDirection: 'row', paddingHorizontal: 20, gap: 12, marginBottom: 28 },
-  statCard: { flex: 1, paddingVertical: 18, borderRadius: theme.radiusMedium, alignItems: 'center', gap: 8, backgroundColor: theme.surface, borderWidth: 1, borderColor: theme.border },
+  statCard: { flex: 1, paddingVertical: 18, borderRadius: theme.radiusMedium, alignItems: 'center', gap: 8, backgroundColor: theme.surface, borderWidth: 1, borderColor: theme.border, ...theme.shadow },
   statValue: { fontSize: 26, fontWeight: '700' },
   statLabel: { fontSize: 12, fontWeight: '600', color: theme.textMuted, textAlign: 'center', writingDirection: 'rtl' },
 
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
   countBadgeText: { color: '#FFF', fontSize: 13, fontWeight: '700' },
 
   // Trip card
-  tripCard: { marginHorizontal: 20, marginBottom: 12, padding: 18, backgroundColor: theme.surface, borderRadius: theme.radiusLarge, borderWidth: 1, borderColor: theme.border },
+  tripCard: { marginHorizontal: 20, marginBottom: 12, padding: 18, backgroundColor: theme.surface, borderRadius: theme.radiusLarge, borderWidth: 1, borderColor: theme.border, ...theme.shadow },
   tripCardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 },
   tripTypeRow: { flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1 },
   tripTypeIcon: { width: 44, height: 44, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },

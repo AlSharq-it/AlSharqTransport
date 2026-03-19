@@ -14,7 +14,7 @@ export default function AdminTabsLayout() {
       tabBarInactiveTintColor: theme.textMuted,
       tabBarLabelStyle: { fontSize: 11, fontWeight: '600', writingDirection: 'rtl' },
       tabBarStyle: {
-        backgroundColor: '#0B1929',
+        backgroundColor: theme.primary,
         borderTopWidth: 0,
         height: Platform.select({ ios: insets.bottom + 60, android: insets.bottom + 60, default: 70 }),
         paddingTop: 8,

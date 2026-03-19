@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
   resendBtn: { alignSelf: 'center', marginTop: 16, paddingVertical: 10, paddingHorizontal: 20 },
   resendText: { fontSize: 14, fontWeight: '600', color: theme.primary, textDecorationLine: 'underline' },
   bottomBar: { paddingHorizontal: 20, paddingTop: 12, backgroundColor: theme.surface, borderTopWidth: 1, borderTopColor: theme.border },
-  nextBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: theme.primary, paddingVertical: 16, borderRadius: theme.radiusMedium },
+  nextBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: theme.accent, paddingVertical: 16, borderRadius: theme.radiusMedium },
   nextBtnText: { color: '#FFF', fontSize: 16, fontWeight: '700' },
   submitBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: theme.success, paddingVertical: 16, borderRadius: theme.radiusMedium },
   submitBtnText: { color: '#FFF', fontSize: 16, fontWeight: '700' },

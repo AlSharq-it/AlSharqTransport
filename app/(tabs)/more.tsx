@@ -66,9 +66,8 @@ export default function MoreScreen() {
   ];
 
   const supportSettings = [
-    { id: 'wa', icon: 'chat', label: t.contactViaWhatsApp, value: '0569559088', onPress: openAdminWhatsApp, showChevron: true, color: '#25D366' },
-    { id: '7', icon: 'email', label: t.contactUs, value: config.email, onPress: () => {}, showChevron: true },
-    { id: '8', icon: 'info-outline', label: t.aboutApp, value: `${t.version} ${config.version}`, onPress: () => {}, showChevron: true },
+    { id: 'wa', icon: 'chat', label: 'واتسآب الدعم', value: '0569559088 | للمساعدة والدعم', onPress: openAdminWhatsApp, showChevron: true, color: '#25D366' },
+    { id: '8', icon: 'info-outline', label: t.aboutApp, value: `الشرق درايفر • ${t.version} ${config.version}`, onPress: () => {}, showChevron: false },
   ];
 
   const renderSettingsGroup = (title: string, items: any[]) => (
@@ -135,14 +134,22 @@ export default function MoreScreen() {
         {activeAnnouncements.length > 0 ? (
           <Animated.View entering={FadeInDown.duration(400).delay(150)}>
             <View style={styles.settingsGroup}>
-              <Text style={styles.groupTitle}>الإعلانات</Text>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                <Text style={styles.groupTitle}>الإعلانات</Text>
+                <View style={[{ paddingHorizontal: 8, paddingVertical: 3, borderRadius: 12, backgroundColor: theme.accent }]}><Text style={{ color: '#FFF', fontSize: 11, fontWeight: '700' }}>{activeAnnouncements.length}</Text></View>
+              </View>
               {activeAnnouncements.slice(0, 3).map(ann => {
-                const colors: Record<string, string> = { info: '#3B82F6', warning: '#F59E0B', promo: '#10B981', urgent: '#EF4444' };
+                const colors: Record<string, string> = { info: '#1A3C6E', warning: '#F97316', promo: '#059669', urgent: '#DC2626' };
+                const annColor = colors[ann.type] || theme.primary;
                 return (
-                  <View key={ann.id} style={styles.annCard}>
-                    <View style={[styles.annDot, { backgroundColor: colors[ann.type] || theme.primary }]} />
-                    <View style={{ flex: 1 }}><Text style={styles.annTitle}>{ann.title}</Text><Text style={styles.annBody} numberOfLines={2}>{ann.body}</Text></View>
-                  </View>
+                  <Pressable key={ann.id} onPress={() => Linking.openURL('https://wa.me/966569559088').catch(() => {})} style={[styles.annCard, { borderLeftWidth: 4, borderLeftColor: annColor }]}>
+                    <View style={[styles.annDot, { backgroundColor: annColor }]} />
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.annTitle}>{ann.title}</Text>
+                      <Text style={styles.annBody} numberOfLines={2}>{ann.body}</Text>
+                    </View>
+                    <MaterialIcons name="chat" size={18} color="#25D366" />
+                  </Pressable>
                 );
               })}
             </View>
@@ -170,7 +177,7 @@ export default function MoreScreen() {
         </Animated.View>
 
         <Pressable onPress={handleLogoTap} style={styles.footer}>
-          <Text style={styles.footerText}>{t.appName}</Text>
+          <Text style={styles.footerText}>الشرق درايفر</Text>
           <Text style={styles.footerVersion}>{t.version} {config.version}</Text>
           {tapCount >= 3 ? <Text style={styles.tapHint}>{5 - tapCount} نقرات متبقية...</Text> : null}
         </Pressable>
@@ -204,20 +211,20 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: theme.background },
   header: { paddingHorizontal: 20, paddingTop: 12, paddingBottom: 16 },
   title: { ...typography.title, writingDirection: 'rtl', textAlign: 'right' },
-  profileCard: { marginHorizontal: 20, padding: 28, backgroundColor: theme.surface, borderRadius: theme.radiusXL, alignItems: 'center', borderWidth: 1, borderColor: theme.border, marginBottom: 24 },
-  profileAvatar: { width: 80, height: 80, borderRadius: 40, backgroundColor: theme.primary + '20', alignItems: 'center', justifyContent: 'center', marginBottom: 12 },
-  profileName: { fontSize: 20, fontWeight: '700', color: theme.textPrimary, writingDirection: 'rtl' },
-  profilePhone: { ...typography.caption, marginTop: 4, writingDirection: 'rtl' },
-  levelBadge: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 8, paddingHorizontal: 12, paddingVertical: 5, borderRadius: theme.radiusFull },
-  levelText: { fontSize: 12, fontWeight: '700' },
-  roleBadge: { paddingHorizontal: 12, paddingVertical: 4, borderRadius: theme.radiusFull, marginTop: 6 },
-  roleText: { fontSize: 12, fontWeight: '700' },
+  profileCard: { marginHorizontal: 20, padding: 28, backgroundColor: theme.primary, borderRadius: theme.radiusXL, alignItems: 'center', marginBottom: 24, ...theme.shadowElevated },
+  profileAvatar: { width: 80, height: 80, borderRadius: 40, backgroundColor: 'rgba(255,255,255,0.2)', alignItems: 'center', justifyContent: 'center', marginBottom: 12 },
+  profileName: { fontSize: 20, fontWeight: '700', color: '#FFFFFF', writingDirection: 'rtl' },
+  profilePhone: { ...typography.caption, marginTop: 4, writingDirection: 'rtl', color: 'rgba(255,255,255,0.7)' },
+  levelBadge: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 8, paddingHorizontal: 12, paddingVertical: 5, borderRadius: theme.radiusFull, backgroundColor: 'rgba(255,255,255,0.15)' },
+  levelText: { fontSize: 12, fontWeight: '700', color: '#FFFFFF' },
+  roleBadge: { paddingHorizontal: 12, paddingVertical: 4, borderRadius: theme.radiusFull, marginTop: 6, backgroundColor: 'rgba(255,255,255,0.2)' },
+  roleText: { fontSize: 12, fontWeight: '700', color: '#FFFFFF' },
   profileStats: { flexDirection: 'row', marginTop: 18, width: '100%', justifyContent: 'space-around', alignItems: 'center' },
   profileStat: { alignItems: 'center', gap: 4 },
-  profileStatValue: { fontSize: 17, fontWeight: '700', color: theme.textPrimary },
-  profileStatLabel: { fontSize: 11, fontWeight: '600', color: theme.textMuted, writingDirection: 'rtl' },
-  profileStatDivider: { width: 1, height: 36, backgroundColor: theme.border },
-  statusToggle: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 18, paddingHorizontal: 20, paddingVertical: 10, borderRadius: theme.radiusFull },
+  profileStatValue: { fontSize: 17, fontWeight: '700', color: '#FFFFFF' },
+  profileStatLabel: { fontSize: 11, fontWeight: '600', color: 'rgba(255,255,255,0.7)', writingDirection: 'rtl' },
+  profileStatDivider: { width: 1, height: 36, backgroundColor: 'rgba(255,255,255,0.25)' },
+  statusToggle: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 18, paddingHorizontal: 20, paddingVertical: 10, borderRadius: theme.radiusFull, backgroundColor: 'rgba(255,255,255,0.15)' },
   statusToggleText: { color: '#FFF', fontSize: 14, fontWeight: '600' },
   settingsGroup: { marginBottom: 20, paddingHorizontal: 20 },
   groupTitle: { ...typography.captionBold, writingDirection: 'rtl', textAlign: 'right', marginBottom: 8, paddingHorizontal: 4 },
@@ -235,7 +242,7 @@ const styles = StyleSheet.create({
   logoutBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, marginHorizontal: 20, paddingVertical: 16, borderRadius: theme.radiusMedium, backgroundColor: theme.errorLight, marginTop: 12 },
   logoutText: { fontSize: 15, fontWeight: '600', color: theme.error },
   footer: { alignItems: 'center', paddingVertical: 24, gap: 4 },
-  footerText: { ...typography.caption, writingDirection: 'rtl' },
+  footerText: { ...typography.caption, writingDirection: 'rtl', fontWeight: '700', color: theme.primary },
   footerVersion: { fontSize: 11, fontWeight: '600', color: theme.textMuted },
   tapHint: { fontSize: 11, fontWeight: '600', color: theme.accent, marginTop: 4, writingDirection: 'rtl' },
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'flex-end' },

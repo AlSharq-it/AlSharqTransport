@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
   checkboxText: { ...typography.bodyBold, writingDirection: 'rtl', flex: 1, textAlign: 'right' },
   bottomBar: { paddingHorizontal: 20, paddingTop: 12, backgroundColor: theme.surface, borderTopWidth: 1, borderTopColor: theme.border },
   btnRow: { flexDirection: 'row', gap: 10 },
-  primaryBtn: { flex: 2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: theme.primary, paddingVertical: 16, borderRadius: theme.radiusMedium },
+  primaryBtn: { flex: 2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: theme.accent, paddingVertical: 16, borderRadius: theme.radiusMedium },
   primaryBtnText: { color: '#FFF', fontSize: 16, fontWeight: '700' },
   secondaryBtn: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingVertical: 16, borderRadius: theme.radiusMedium, backgroundColor: theme.surfaceElevated },
   secondaryBtnText: { fontSize: 15, fontWeight: '600', color: theme.textSecondary },

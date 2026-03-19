@@ -179,6 +179,10 @@ export default function TripDetailScreen() {
           <View style={styles.priceRow}><Text style={styles.priceLabel}>{t.platformCommission}</Text><Text style={[styles.priceValue, { color: theme.error }]}>-{commission.toFixed(0)} {t.currency}</Text></View>
           <View style={styles.detailDivider} />
           <View style={[styles.priceRow, styles.totalRow]}><Text style={styles.totalLabel}>{t.driverEarning}</Text><Text style={styles.totalValue}>{driverEarning.toFixed(0)} {t.currency}</Text></View>
+          <View style={styles.commissionNote}>
+            <MaterialIcons name="info-outline" size={15} color={theme.accent} />
+            <Text style={styles.commissionNoteText}>يمكنك استرجاع العمولة بالكامل في حال لم يناسبك المشوار بعد التواصل مع الإدارة</Text>
+          </View>
         </Animated.View>
       </ScrollView>
 
@@ -254,6 +258,8 @@ const styles = StyleSheet.create({
   routePointDetail: { gap: 2 },
   routePointLabel: { fontSize: 11, fontWeight: '600', color: theme.textMuted, writingDirection: 'rtl', textAlign: 'right' },
   routePointAddress: { ...typography.body, writingDirection: 'rtl', textAlign: 'right', fontWeight: '500' },
+  commissionNote: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingTop: 12, paddingHorizontal: 4, marginTop: 4 },
+  commissionNoteText: { fontSize: 12, color: theme.accent, flex: 1, writingDirection: 'rtl', textAlign: 'right', lineHeight: 18, fontWeight: '500' },
   priceCard: { marginHorizontal: 20, marginTop: 14, padding: 20, backgroundColor: theme.surface, borderRadius: theme.radiusLarge, borderWidth: 1, borderColor: theme.border, marginBottom: 20 },
   priceRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 },
   priceLabel: { ...typography.body, writingDirection: 'rtl' },
@@ -266,7 +272,7 @@ const styles = StyleSheet.create({
   actionRow: { flexDirection: 'row', gap: 10 },
   actionBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, paddingVertical: 18, borderRadius: theme.radiusMedium },
   actionBtnText: { fontSize: 16, fontWeight: '700', color: '#FFF' },
-  applyBtn: { backgroundColor: theme.primary },
+  applyBtn: { backgroundColor: theme.accent },
   startBtn: { backgroundColor: theme.statusInProgress },
   completeBtn: { backgroundColor: theme.success },
   cancelBtn: { backgroundColor: theme.errorLight, borderWidth: 1.5, borderColor: theme.error },
